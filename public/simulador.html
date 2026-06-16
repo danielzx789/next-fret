@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>AquaTech | Simulador</title>
+
+    <script src="./js/sessao.js"></script>
+
+    <link rel="stylesheet" href="./css/estilo.css">
+    <link rel="icon" href="./assets/icon/favicon2.ico">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+</head>
+
+<body>
+
+    <!--header inicio-->
+    <div class="header">
+        <div class="container">
+            <h1 class="titulo">Next Fret</h1>
+            <ul class="navbar">
+                <li>
+                    <a href="./index.html">Inicial</a>
+                </li>
+                <li class="agora">Setup</li>
+                <li>|</li>
+                <li>
+                    <a href="./login.html">Login</a>
+                </li>
+                <li>
+                    <a href="./login.html">Cadastro</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+
+    <!-- simulador inicio -->
+    <div class="simulador">
+        <div class="container">
+            <h2>Calculadora de setup</h2>
+            <div class="card card-simulador">
+        <h2>Novo item</h2>
+        <div class="formulario">
+          <!--
+                         Para inserir mais um campo, copie uma das inputs abaixo.
+                         Assim que inserir vá para o script abaixo.
+                     -->
+          
+          <div class="campo">
+            <span>nome do produto</span>
+            <input id="nomeProduto_input" type="text" placeholder="" />
+          </div>
+          <div class="campo">
+            <span>tipo</span>
+            <input id="tipo_input" type="text" placeholder="" />
+          </div>
+          <div class="campo">
+            <span>preco</span>
+            <input id="preco_input" type="text" placeholder="" />
+          </div>
+          <button class="botao" onclick="calcular()">calcular</button>
+        </div>
+      </div>
+    </div>
+    <!-- simulador fim -->
+
+    <!--footer inicio-->
+    <div class="footer">
+        <div class="container">
+            <h4>Feito com amor por aluno &hearts; SPTech &copy; 2023-2026</h4>
+        </div>
+    </div>
+    <!--footer fim-->
+</body>
+
+</html>
