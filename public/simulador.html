@@ -1,80 +1,169 @@
-<!DOCTYPE html>
-<html lang="pt-br">
+        <!DOCTYPE html>
+        <html lang="pt-br">
 
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <head>
+            <meta charset="UTF-8">
+            <meta http-equiv="X-UA-Compatible" content="IE=edge">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>AquaTech | Simulador</title>
+            <title>AquaTech | Simulador</title>
 
-    <script src="./js/sessao.js"></script>
+            <script src="./js/sessao.js"></script>
 
-    <link rel="stylesheet" href="./css/estilo.css">
-    <link rel="icon" href="./assets/icon/favicon2.ico">
-    <link rel="preconnect" href="https://fonts.gstatic.com">
-</head>
+            <link rel="stylesheet" href="./css/estilo.css">
+            <link rel="icon" href="./assets/icon/favicon2.ico">
+            <link rel="preconnect" href="https://fonts.gstatic.com">
+        </head>
 
-<body>
+        <body>
 
-    <!--header inicio-->
-    <div class="header">
-        <div class="container">
-            <h1 class="titulo">Next Fret</h1>
-            <ul class="navbar">
-                <li>
-                    <a href="./index.html">Inicial</a>
-                </li>
-                <li class="agora">Setup</li>
-                <li>|</li>
-                <li>
-                    <a href="./login.html">Login</a>
-                </li>
-                <li>
-                    <a href="./login.html">Cadastro</a>
-                </li>
-            </ul>
-        </div>
-    </div>
+            <!--header inicio-->
+            <div class="header">
+                <div class="container">
+                    <h1 class="titulo">Next Fret</h1>
+                    <ul class="navbar">
+                        <li>
+                            <a href="./index.html">Inicial</a>
+                        </li>
+                        <li class="agora">Setup</li>
+                        <li>|</li>
+                        <li>
+                            <a href="./login.html">Login</a>
+                        </li>
+                        <li>
+                            <a href="./login.html">Cadastro</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
 
 
-    <!-- simulador inicio -->
-    <div class="simulador">
-        <div class="container">
-            <h2>Calculadora de setup</h2>
-            <div class="card card-simulador">
-        <h2>Novo item</h2>
-        <div class="formulario">
-          <!--
-                         Para inserir mais um campo, copie uma das inputs abaixo.
-                         Assim que inserir vá para o script abaixo.
-                     -->
-          
-          <div class="campo">
-            <span>nome do produto</span>
-            <input id="nomeProduto_input" type="text" placeholder="" />
-          </div>
-          <div class="campo">
-            <span>tipo</span>
-            <input id="tipo_input" type="text" placeholder="" />
-          </div>
-          <div class="campo">
-            <span>preco</span>
-            <input id="preco_input" type="text" placeholder="" />
-          </div>
-          <button class="botao" onclick="calcular()">calcular</button>
-        </div>
-      </div>
-    </div>
-    <!-- simulador fim -->
+            <!-- simulador inicio -->
+                <h2 class="titulo-setup"> Calculadora de setup</h2>
 
-    <!--footer inicio-->
-    <div class="footer">
-        <div class="container">
-            <h4>Feito com amor por aluno &hearts; SPTech &copy; 2023-2026</h4>
-        </div>
-    </div>
-    <!--footer fim-->
-</body>
+            <div class="container container-tamanho">
+                        <div class="card card-simulador">
+                            <h2>Novo item</h2>
+                            <div class="formulario">
+                                <!--
+                                Para inserir mais um campo, copie uma das inputs abaixo.
+                                Assim que inserir vá para o script abaixo.
+                            -->
 
-</html>
+                                <div class="campo">
+                                    <span>nome do produto</span>
+                                    <input id="nomeProduto_input" type="text" placeholder="" />
+                                </div>
+                                <div class="campo">
+                                    <span>tipo</span>
+                                    <select id="tipo_input">
+                                    <option value="Guitarra">Guitarra</option>
+                                    <option value="Amplificador">Amplificador</option>
+                                    <option value="Pedaleira">Pedaleira</option>
+                                    <option value="Acessório">Acessório</option>
+                                    </select>
+                                </div>
+                                <div class="campo">
+                                    <span>preço</span>
+                                    <input id="preco_input" type="text" placeholder="" />
+                                </div>
+
+
+                                <button class="botao" onclick="exibir()">Salvar</button>
+                            </div>
+                        </div>
+                            <div class="card card-simulador">
+                                <h2>Seu setup</h2>
+                                <div id="msg" class="formulario"></div>
+                            </div>
+                    </div>
+                
+                
+
+                                <!--
+                                Para inserir mais um campo, copie uma das inputs abaixo.
+                                Assim que inserir vá para o script abaixo.
+                            -->
+
+                                    
+                    <!-- simulador fim -->
+
+                    <!--footer inicio-->
+                    <div class="footer">
+                        <div class="container">
+                            <h4>Feito com amor por aluno &hearts; SPTech &copy; 2023-2026</h4>
+                        </div>
+                    </div>
+                    <!--footer fim-->
+        </body>
+        </html>
+        <script>
+            let cadastrados = []
+        function exibir(){
+
+        let nome = nomeProduto_input.value
+        let tipo = tipo_input.value
+        let preco = Number(preco_input.value)
+        let temGuitarra = false
+        let temAmplificador = false
+        let temPedaleira = false
+        let temAcessorio = false
+
+        if(nome == "" || preco <= 0){
+        msg.innerHTML = `preencha corretamente`
+        return
+        }   
+
+        cadastrados.push({
+            nome: nome,
+            tipo: tipo,
+            preco: preco
+            }
+        )
+
+        let total = 0
+        let mensagem = ""
+
+        for(let i = 0; i < cadastrados.length; i++){
+        let item = cadastrados[i]
+
+        mensagem += `${item.nome}, ${item.tipo}, ${item.preco}<br>`
+
+        total += item.preco
+
+        console.log(cadastrados[i])
+
+        if(item.tipo == "Guitarra"){
+            temGuitarra = true
+        }
+        if(item.tipo == "Amplificador"){
+            temAmplificador = true 
+        }
+        if(item.tipo == "Pedaleira"){
+            temPedaleira = true
+        }
+        if(item.tipo == "Acessório"){
+            temAcessorio = true
+        }
+        }
+
+        let porcentagem = 0
+
+        if(temGuitarra && temAmplificador && temAcessorio && temPedaleira){
+            porcentagem = 25
+        }
+        else if(temGuitarra && temAmplificador){
+            porcentagem = 10
+        }
+
+        let valor_desconto = total * (porcentagem / 100)
+        let total_final = total - valor_desconto
+
+        msg.innerHTML = `${mensagem} Subtotal: R$ ${total.toFixed(2)} <br> Desconto: ${porcentagem}% <br> Total final: R$ ${total_final.toFixed(2)}`
+
+        nomeProduto_input.value = ""
+        preco_input.value = ""
+        tipo_input.value = "Guitarra"
+
+        }
+        </script>
