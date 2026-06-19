@@ -5,6 +5,9 @@ body {
   padding: 0;
   font-family: 'Barlow', 'Segoe UI', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   background-color: rgb(22, 69, 32);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 
 :root {
@@ -129,6 +132,7 @@ body {
   color: #fff;
   display: flex;
   font-size: 15px;
+  margin-top: auto;
 }
 
 .footer .container {
@@ -164,7 +168,7 @@ body {
   justify-content: space-evenly;
   color: rgb(255, 255, 255);
   flex-direction: column;
-  height: fit-content;
+  min-height: 350px;
   padding: 20px 0;
 }
 
@@ -310,17 +314,44 @@ input {
 
 .simulador {
   color: white;
-  background-image: url('../assets/imgs/night.png');
+  display: flex;
+  flex-direction: column;
+  margin: auto;
+  justify-content: center;
+  align-items: center;
 }
-
+.titulo-setup{
+  color: white;
+  text-align: center;
+  margin: 0;
+  padding: 20px 0;
+  background-color: #0e1d0e;
+}
 .simulador .container {
   flex-direction: column;
   height: var(--tamanho-simulador);
   justify-content: center;
   align-items: center;
   height: 100%;
+  margin: auto;
+  display: flex;
 }
 
+.container-tamanho{
+width: 100%;
+display: flex;
+justify-content: center;
+align-items: stretch;
+gap: 30px;
+padding: 40px 0;
+background-image: url('../assets/imgs/night.png');
+background-size: cover;
+}
+
+.card-simulador{
+  width: 300px;
+  min-height: 350px;
+}
 /* ALERTA */
 
 #alerta {
