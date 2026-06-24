@@ -75,6 +75,7 @@
                             <div class="card card-simulador">
                                 <h2>Seu setup</h2>
                                 <div id="msg" class="formulario"></div>
+                                <button onclick="remover()">remover</button>
                             </div>
                     </div>
                 
@@ -99,31 +100,15 @@
         </html>
         <script>
             let cadastrados = []
-        function exibir(){
+        function atualizar(){
 
-        let nome = nomeProduto_input.value
-        let tipo = tipo_input.value
-        let preco = Number(preco_input.value)
+        let total = 0
+        let mensagem = ""
         let temGuitarra = false
         let temAmplificador = false
         let temPedaleira = false
         let temAcessorio = false
-
-        if(nome == "" || preco <= 0){
-        msg.innerHTML = `preencha corretamente`
-        return
-        }   
-
-        cadastrados.push({
-            nome: nome,
-            tipo: tipo,
-            preco: preco
-            }
-        )
-
-        let total = 0
-        let mensagem = ""
-
+        
         for(let i = 0; i < cadastrados.length; i++){
         let item = cadastrados[i]
 
@@ -164,6 +149,41 @@
         nomeProduto_input.value = ""
         preco_input.value = ""
         tipo_input.value = "Guitarra"
+
+        }
+        function exibir(){
+
+        let nome = nomeProduto_input.value
+        let tipo = tipo_input.value
+        let preco = Number(preco_input.value)
+
+        if(nome == "" || preco <= 0){
+        msg.innerHTML = `preencha corretamente`
+        return
+        }   
+
+        cadastrados.push({
+            nome: nome,
+            tipo: tipo,
+            preco: preco
+            }
+        )
+        atualizar()
+        }
+
+        function remover(){
+            
+        if(cadastrados.length == 0){
+        return
+        }
+
+        else{
+        let removido = cadastrados.pop()
+        
+        msg.innerHTML = `${removido}`
+        }
+        
+        atualizar()
 
         }
         </script>
