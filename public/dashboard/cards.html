@@ -20,31 +20,31 @@
         rel="stylesheet">
 </head>
 
-<body onload="validarSessao(), exibirAquarios(),  atualizacaoPeriodica()">
+<body onload="validarSessao(), exibirAquarios(),  atualizacaoPeriodica()"style="background-color: #161618;>
 
     <div class="janela">
 
         <div class="header-left dash-header">
 
-            <h1>AquaTech</h1>
+            <h1>Next Fret</h1>
 
             <div class="hello">
                 <h3>Olá, <span id="b_usuario">usuário</span>!</h3>
             </div>
 
             <div class="btn-nav">
-                <h3>Aquários e Terrários</h3>
+                <h3>Aulas</h3>
             </div>
 
             <div class="btn-nav-white">
                 <a href="./dashboard.html">
-                    <h3>Gráficos</h3>
+                    <h3>Progresso</h3>
                 </a>
             </div>
 
             <div class="btn-nav-white">
                 <a href="./mural.html">
-                    <h3>Mural de Avisos</h3>
+                    <h3>Materiais</h3>
                 </a>
             </div>
 
@@ -54,43 +54,56 @@
 
         </div>
 
-        <div class="dash">
-            <div id="alerta">
-            </div>
-            <div class="area-parametros-alerta">
-                <p class="titulo-legenda">
-                    Legenda - Parâmetros para Alertas
-                </p>
-                <div class="parametros-alerta">
-                    <div class="item-regua perigo-frio">
-                        <p>Perigo</p>
-                        <p>&lt;=5°C</p>
-                    </div>
-                    <div class="item-regua alerta-frio">
-                        <p>Alerta</p>
-                        <p>&lt;=10°C</p>
-                    </div>
-                    <div class="item-regua ideal">
-                        <p>Ideal</p>
-                        <p>20°C</p>
-                    </div>
-                    <div class="item-regua alerta-quente">
-                        <p>Alerta</p>
-                        <p>&gt;=22°C</p>
-                    </div>
-                    <div class="item-regua perigo-quente">
-                        <p>Perigo</p>
-                        <p>&gt;=23°C</p>
-                    </div>
+           <div class="dash-right">
+
+
+            <div class="avisos">
+                <div id="alerta">
+                </div>
+                <div class="container">
+                    <h1>Aulas</h1>
+                    
+                    <div class="div-form">
+                        <form id="form_postagem" method="post" onsubmit="return publicar()">
+                            <div class="bloco-aula">
+                            <label>
+                                Aula 1
+                            </label>
+                            <button class="botao">marcar como concluído</button>
+                            </div>
+                            <br>
+                            <div class="bloco-aula">
+                            <label>
+                                Aula 2
+                            </label>
+                            <button class="botao">marcar como concluído</button>
+                            </div>
+                            <br>
+                            <div class="bloco-aula">
+                            <label>
+                                Aula 3 
+                            </label>
+                            <button class="botao">marcar como concluído</button>
+                            </div>
+                            <br>
+                            <div class="bloco-aula">
+                            <label>
+                                Aula 4
+                            </label>
+                            <button class="botao">marcar como concluído</button>
+                            </div>
+                            <br>
+                            <div class="bloco-aula">
+                            <label>
+                                Aula 5
+                            </label>
+                            <button class="botao">marcar como concluído</button>
+                            </div>
+                        </form>
+                    
                 </div>
             </div>
-
-            <div class="cards" id="cardAquarios">
-
-            </div>
-
         </div>
-
     </div>
 
 </body>
