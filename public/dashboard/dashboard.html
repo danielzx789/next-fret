@@ -32,7 +32,7 @@
 
     <div class="janela">
         <div class="header-left">
-            <h1>AquaTech</h1>
+            <h1>Next Fret</h1>
 
             <div class="hello">
                 <h3>Olá, <span id="b_usuario">usuário</span>!</h3>
@@ -40,19 +40,19 @@
 
             <div class="btn-nav-white">
                 <a href="./cards.html">
-                    <h3>Aquários e Terrários</h3>
+                    <h3>Aulas</h3>
                 </a>
             </div>
 
             <div class="btn-nav">
 
-                <h3>Gráficos</h3>
+                <h3>Progresso</h3>
 
             </div>
 
             <div class="btn-nav-white">
                 <a href="./mural.html">
-                    <h3>Mural de Avisos</h3>
+                    <h3>Materiais</h3>
                 </a>
             </div>
 
@@ -70,16 +70,38 @@
                 <!-- O gráfico é chamado de acordo com o id (fk_aquario) do banco  -->
             </div>
             <div id="graficos">
+                <canvas id="grafico"></canvas>
             </div>
         </div>
     </div>
-
+    
 
 </body>
 
 </html>
 
 <script>
+
+const labels = [1,2,3,4,5];
+const data = {
+  labels: labels,
+  datasets: [{
+    label: 'Meu progresso',
+    data: [1, 2, 3, 4, 5],
+    fill: false,
+    borderColor: 'rgb(144, 238, 144)',
+    tension: 0.1
+  }]
+};
+
+const config = {
+  type: 'line',
+  data: data,
+};
+
+const grafico = new Chart(document.getElementById("grafico"),config)
+
+    
     b_usuario.innerHTML = sessionStorage.NOME_USUARIO;
 
     let proximaAtualizacao;
