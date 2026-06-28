@@ -26,7 +26,7 @@
 
         <div class="header-left">
 
-            <h1>AquaTech</h1>
+            <h1>Next fret</h1>
 
             <div class="hello">
                 <h3>Olá, <span id="b_usuario">usuário</span>!</h3>
@@ -34,18 +34,18 @@
 
             <div class="btn-nav-white">
                 <a href="cards.html">
-                    <h3>Aquários e Terrários</h3>
+                    <h3>Aulas</h3>
                 </a>
             </div>
 
             <div class="btn-nav-white">
                 <a href="./dashboard.html">
-                    <h3>Gráficos</h3>
+                    <h3>Progresso</h3>
                 </a>
             </div>
 
             <div class="btn-nav">
-                <h3>Mural de Avisos</h3>
+                <h3>Materiais</h3>
             </div>
 
             <div class="btn-logout" onclick="limparSessao()">
@@ -61,31 +61,46 @@
                 <div id="alerta">
                 </div>
                 <div class="container">
-                    <h1>Publicar um aviso</h1>
+                    <h1>Materiais de apoio</h1>
+                    
                     <div class="div-form">
                         <form id="form_postagem" method="post" onsubmit="return publicar()">
+                            <div class="bloco-aula">
                             <label>
-                                Título:
-                                <br>
-                                <input name="titulo" id="titulo" maxlength="100" type="text">
+                                Material Aula 1
                             </label>
+                            <a class="botao-download" href="assets/imgs/download.png" download="Apostila Didatica-Vinicius-Santiago-1.pdf"></a>
+                            </div>
                             <br>
-                            <br>
+                            <div class="bloco-aula">
                             <label>
-                                Descrição (máximo de 250 caracteres):
-                                <br>
-                                <textarea name="descricao" id="textarea_descricao" maxlength="250" rows="5"></textarea>
+                                Material Aula 2
                             </label>
+                            <a class="botao-download" href="assets/imgs/download.png" download="Apostila Didatica-Vinicius-Santiago-Modulo-2.pdf"></a>
+                            </div>
                             <br>
+                            <div class="bloco-aula">
+                            <label>
+                                Material Aula 3 
+                            </label>
+                            <a class="botao-download" href="assets/imgs/download.png" download="Modelo-e-formação-de-Acordes.pdf"></a>
+                            </div>
                             <br>
-                            <button>Enviar</button>
+                            <div class="bloco-aula">
+                            <label>
+                                Material Aula 4
+                            </label>
+                            <a class="botao-download" href="assets/imgs/download.png" download="CAGED-Escala-Maior.pdf"></a>
+                            </div>
+                            <br>
+                            <div class="bloco-aula">
+                            <label>
+                                Material Aula 5
+                            </label>
+                            <a class="botao-download" href="assets/imgs/download.png" download="Escala Maior-e-Pentatonica-Maior-Sistema-5.pdf"></a>
+                            </div>
                         </form>
-                    </div>
-                    <h1>Mural de Avisos</h1>
-                    <div class="div-results">
-                        <div id="feed_container" class="feed-container">
-                        </div>
-                    </div>
+                    
                 </div>
             </div>
         </div>
