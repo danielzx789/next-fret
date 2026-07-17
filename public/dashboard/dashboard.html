@@ -32,7 +32,7 @@
 
     <div class="janela">
         <div class="header-left">
-            <h1>AquaTech</h1>
+            <h1>Next Fret</h1>
 
             <div class="hello">
                 <h3>Olá, <span id="b_usuario">usuário</span>!</h3>
@@ -40,19 +40,19 @@
 
             <div class="btn-nav-white">
                 <a href="./cards.html">
-                    <h3>Aquários e Terrários</h3>
+                    <h3>Aulas</h3>
                 </a>
             </div>
 
             <div class="btn-nav">
 
-                <h3>Gráficos</h3>
+                <h3>Progresso</h3>
 
             </div>
 
             <div class="btn-nav-white">
                 <a href="./mural.html">
-                    <h3>Mural de Avisos</h3>
+                    <h3>Materiais</h3>
                 </a>
             </div>
 
@@ -61,26 +61,176 @@
             </div>
 
         </div>
+        
+        <div class="dashboard">
+            <div class="kpis">
 
-        <div class="dash">
-            <div id="alerta">
-            </div>
+        <div class="kpi">
+        <span>Aulas concluídas</span>
+        <div id="kpiConcluidas"></div>
+        </div>
+
+        <div class="kpi">
+    <span>Aulas restantes</span>
+    <h1 id="kpiRestantes">0</h1>
+        </div>
+
+        <div class="kpi">
+    <span>Progresso</span>
+    <h1 id="kpiProgresso">0%</h1>
+        </div>
+
+     </div>
+
+     <div class="graficos">
+
+        <div class="grafico">
+            <canvas id="grafico1"></canvas>
+        </div>
+
+        <div class="grafico">
+            <canvas id="grafico2"></canvas>
+        </div>
+
+    </div>
+            <div style="display:none">
+
+            <div id="alerta"></div>
 
             <div class="btns-dash" id="btnAquario">
                 <!-- O gráfico é chamado de acordo com o id (fk_aquario) do banco  -->
             </div>
             <div id="graficos">
+                <canvas id="grafico"></canvas>
             </div>
         </div>
     </div>
-
+    
 
 </body>
 
 </html>
 
 <script>
+var idUsuario = sessionStorage.ID_USUARIO;
+
+const labels = [1,2,3,4,5];
+const data = {
+  labels: labels,
+  datasets: [{
+    label: 'Meu progresso',
+    data: [1, 2, 3, 4, 5],
+    fill: false,
+    borderColor: 'rgb(144, 238, 144)',
+    tension: 0.1
+  }]
+};
+
+const config = {
+  type: 'line',
+  data: data,
+};
+
+const grafico = new Chart(document.getElementById("grafico"),config)
+var dashboard = {}
+
+async function carregarDashboard(){
+
+if (!idUsuario) {
+            console.error ("Usuário não encontrado.");
+        }
+
+var resposta = await fetch(`/aulas/grafico/${idUsuario}`)
+
+ if(!resposta.ok){
+            console.error("Erro ao buscar KPIs");
+        }
+
+dashboard = await resposta.json()
+
+            preencherKpis();
+
+
+}
+function preencherKpis(){
+
+    dashboard.ultimas_aulas_concluidas.forEach(aula => {
+        kpiConcluidas.innerHTML += `<div id="${aula.id}">${aula.nomeAula}</div>` 
+    });
+
+    kpiRestantes.innerHTML =
+    dashboard.quantidade_aulas_restantes;
+
+    kpiProgresso.innerHTML =
+    `${dashboard.porcentagemProgresso.toFixed(0)}%`;
+
+                preencherGrafico();
+
+}
+async function preencherGrafico(){
+    var aulas  = await fetch(`/aulas/listar`)
+    aulas = await aulas.json()
+
+console.log(dashboard.listarConcluidasPorTempo.data, dashboard.listarConcluidasPorTempo.total, dashboard )
+const labels = dashboard.listarConcluidasPorTempo.map(aula => aula.data);
+const data = {
+  labels: labels,
+  datasets: [{
+    label: 'Meu progresso',
+    data: dashboard.listarConcluidasPorTempo.map(aula => aula.total),
+    fill: false,
+    borderColor: 'rgb(144, 238, 144)',backgroundColor: 'rgb(144, 238, 144)',
+    tension: 0.1
+  }], 
+   
+};
+
+const config = {
+  type: 'bar',
+  data: data,
+  options: {
+    scales: {
+        y:{
+            min: 0,
+            max: aulas.length,
+            ticks: {stepSize: 1}
+        }
+
+    }
+
+  }
+};
+
+const grafico = new Chart(document.getElementById("grafico1"),config)
+
+const labels2 = ["minha colocação", "outros usuários"];
+const data2 = {
+  labels: labels2,
+  datasets: [{
+    label: '%',
+    data: [dashboard.colocacaoUsuario, 100 - dashboard.colocacaoUsuario],
+    fill: false,
+    borderColor: ['rgb(144, 238, 144)','rgb(104, 198, 104)' ],backgroundColor: ['rgb(144, 238, 144)','rgb(104, 198, 104)' ],
+    tension: 0.1
+  }], 
+   
+};
+
+const config2 = {
+  type: 'doughnut',
+  data: data2,
+  
+};
+
+const grafico2 = new Chart(document.getElementById("grafico2"),config2)
+
+
+
+
+}
+
     b_usuario.innerHTML = sessionStorage.NOME_USUARIO;
+    carregarDashboard()
 
     let proximaAtualizacao;
 

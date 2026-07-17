@@ -20,31 +20,31 @@
         rel="stylesheet">
 </head>
 
-<body onload="validarSessao(), exibirAquarios(),  atualizacaoPeriodica()">
+<body onload="validarSessao(), exibirAulas()"style="background-color: #161618;">
 
     <div class="janela">
 
         <div class="header-left dash-header">
 
-            <h1>AquaTech</h1>
+            <h1>Next Fret</h1>
 
             <div class="hello">
                 <h3>Olá, <span id="b_usuario">usuário</span>!</h3>
             </div>
 
             <div class="btn-nav">
-                <h3>Aquários e Terrários</h3>
+                <h3>Aulas</h3>
             </div>
 
             <div class="btn-nav-white">
                 <a href="./dashboard.html">
-                    <h3>Gráficos</h3>
+                    <h3>Progresso</h3>
                 </a>
             </div>
 
             <div class="btn-nav-white">
                 <a href="./mural.html">
-                    <h3>Mural de Avisos</h3>
+                    <h3>Materiais</h3>
                 </a>
             </div>
 
@@ -54,67 +54,120 @@
 
         </div>
 
-        <div class="dash">
-            <div id="alerta">
-            </div>
-            <div class="area-parametros-alerta">
-                <p class="titulo-legenda">
-                    Legenda - Parâmetros para Alertas
-                </p>
-                <div class="parametros-alerta">
-                    <div class="item-regua perigo-frio">
-                        <p>Perigo</p>
-                        <p>&lt;=5°C</p>
-                    </div>
-                    <div class="item-regua alerta-frio">
-                        <p>Alerta</p>
-                        <p>&lt;=10°C</p>
-                    </div>
-                    <div class="item-regua ideal">
-                        <p>Ideal</p>
-                        <p>20°C</p>
-                    </div>
-                    <div class="item-regua alerta-quente">
-                        <p>Alerta</p>
-                        <p>&gt;=22°C</p>
-                    </div>
-                    <div class="item-regua perigo-quente">
-                        <p>Perigo</p>
-                        <p>&gt;=23°C</p>
-                    </div>
+           <div class="dash-right">
+
+
+            <div class="avisos">
+                <div id="alerta">
+                </div>
+                <div class="container">
+                    <h1>Aulas</h1>
+                    
+                    <div class="div-form" id="aulas">
+                            
+                            </div>
+                    
                 </div>
             </div>
-
-            <div class="cards" id="cardAquarios">
-
-            </div>
-
         </div>
-
     </div>
 
 </body>
 
 <script>
-
-    function exibirAquarios() {
-        JSON.parse(sessionStorage.AQUARIOS).forEach(item => {
-            document.getElementById("cardAquarios").innerHTML += `
-                    <div class="card-aquario">
-                        <div class="title-aquario">
-                            <h1>${item.descricao}</h1>
-                        </div>
-                        <div class="desc-aquario">
-                        <div class="temperatura">
-                            <p id="temp_aquario_${item.id}">-°C</p>
-                        </div>
-                        <div class="cor-alerta" id="card_${item.id}"></div>
-                    </div>
-                    </div>
-                    `
-        });
+var idUsuario = sessionStorage.getItem(`ID_USUARIO`)
+var concluidas = []
+var aulasArray = []
+    async function exibirAulas() {
+       fetch("/aulas/listar").then(resposta =>{
+        resposta.json().then(json =>{
+         json.forEach(aula => {
+            aulasArray.push(aula.id)
+            aulas.innerHTML += `
+            <div class="bloco-aula-pai">
+            <a href = "${aula.video_url}" class="bloco-aula" id ="div_${aula.id}" >
+                            <label>
+                                ${aula.nome}
+                            </label>
+                            </a>
+                            
+                            
+                            <button onclick="controladorAulasConcluidas(${aula.id})" id ="botao_${aula.id}" class="botao">Marcar como concluída</button>
+                            </div>
+                            <br>
+                            
+            `
+         });   
+        })
+       })
+       
+        
+      var resposta = await fetch(`/aulas/concluidas/${idUsuario}`)
+       var json = await resposta.json()
+       json.forEach(aula =>{
+        concluidas.push(aula.id)
+       })
+       estilizarAulasConcluidas()
     }
 
+    async function controladorAulasConcluidas(id){
+    let elemento = document.getElementById(`botao_${idUsuario}`)
+        if(concluidas.indexOf(id) == -1){
+           var respostaConcluir = await fetch(`/aulas/concluir/${idUsuario}/${id}`,{
+                method:"POST", headers: {"Content-Type": "application/json"}
+            })
+            if(respostaConcluir.status == 200){
+                concluidas.push(id)
+
+                estilizarAulasConcluidas()
+            }
+            else{
+                alert("algo deu errado")
+            }
+
+        }
+        else{
+             var respostaDesconcluir = await fetch(`/aulas/desconcluir/${idUsuario}/${id}`,{
+                method:"POST", headers: {"Content-Type": "application/json"}
+            })
+            if(respostaDesconcluir.status == 200){
+                concluidas.splice(concluidas.indexOf(id),1)
+
+                estilizarAulasConcluidas()
+            }
+            else{
+                alert("algo deu errado")
+            }
+
+
+        }
+
+        
+    }
+    function estilizarAulasConcluidas(){
+        console.log(aulas)
+        aulasArray.forEach(aulaId =>{
+        var botao = document.getElementById(`botao_${aulaId}`)
+        var div = document.getElementById(`div_${aulaId}`)
+        console.log(botao)
+        console.log(div)
+
+            if(concluidas.includes(aulaId)){
+        botao.innerHTML = `Concluída`
+        div.style.backgroundColor = "#202e20"
+        
+            }
+            else{
+                div.style.background = "#0d4e1a"
+                botao.innerHTML = "Marcar como concluída"
+
+            }
+        })
+        
+
+
+    }
+   
 </script>
 
 </html>

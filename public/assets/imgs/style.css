@@ -1,0 +1,891 @@
+:root {
+  --color-background: #000000;
+  --color-card: #0d2015;
+  --color-list: #081404;
+  --color-control: #12240a;
+  --color-text: #ffffff;
+  --color-text-secondary: #cfcfcf;
+  --color-border: rgba(255, 255, 255, 0.14);
+  --color-dark-green: #14532d;
+  --color-main-green: #1f7a3a;
+  --color-hover-green: #239447;
+  --color-light-green: #00ff66;
+  --color-orange: #ffb020;
+  --color-red: #ff4d4d;
+
+  --image-logo: url("images/logoguitarra.png");
+  --image-home-hero: url("images/imagemfundohome.png");
+  --image-auth-background: url("images/backgroundcadastroelogin.png");
+  --image-setup-background: url("images/night.png");
+  --image-student: url("images/garotaviolao.png");
+  --image-section: url("images/laptopviolao.png");
+  --image-method-icon: url("images/chapeuformatura.png");
+  --image-setup-icon: url("images/guitarradesenho.png");
+  --image-progress-icon: url("images/graficodesenho.png");
+  --image-download-icon: url("images/download.png");
+  --image-about: url("images/image_guitarraeamp.png");
+}
+
+/* Remove os espaços que vem padrão do navegadr. */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box; /* Faz padding e borda entrarem no tamanho total do elemento. */
+}
+
+body {
+  min-height: 100vh;
+  font-family: Arial, Helvetica, sans-serif;
+  background: var(--color-background);
+  color: var(--color-text);
+}
+
+a {
+  color: inherit; /* Faz o link ter a mesma cor do texto ao redor, em vez de ficar azul por padrão. */
+  text-decoration: none; /* Remove o sublinhado padrão do link. */
+}
+
+p {
+  color: var(--color-text-secondary);
+  line-height: 1.6; /* Dá mais espaço entre uma linha e outra do parágrafo. */
+}
+/* Afasta todas as listas da borda esquerda para melhorar o alinhamento e a leitura do texto */
+ul {
+  margin-left: 20px;
+}
+
+/* Garante que os botões e campos do formulário usem a mesma fonte do resto do site, 
+   já que o navegador não faz essa herança de forma automática. */
+button, input, select {
+  font: inherit;
+}
+
+button {
+  cursor: pointer; /* Mostra a mãozinha ao passar o mouse. */
+}
+
+.logo-image,
+.card-icon,
+.download-icon {
+  display: inline-block; /* Permite que o elemento tenha largura e altura, mesmo sendo usado como imagem pequena na linha. */
+  background-position: center; /* Coloca a imagem de fundo no centro do espaço do elemento. */
+  background-size: contain; /* Ajusta a imagem para caber inteira dentro do espaço, sem cortar. */
+}
+
+.logo-image {
+  width: 100px;
+  height: 100px;
+  background-image: var(--image-logo);
+}
+
+.navbar--mini .logo-image {
+  width: 100px;
+  height: 80px;
+}
+
+.footer-logo .logo-image {
+  width: 50px;
+  height: 50px;
+}
+
+
+.image-frame {
+  width: 100%;
+  height: 450px;
+  border-radius: 15px;
+  background-position: center;
+  background-size: cover; /* Preenche toda a área, mesmo que corte um pouco a imagem. */
+}
+
+.image-frame--student {
+  background-image: var(--image-student);
+}
+
+.image-frame--section {
+  background-image: var(--image-section);
+}
+
+.card-icon {
+  width: 70px;
+  height: 70px;
+  border-radius: 35px;
+}
+
+.card-icon--method {
+  background-image: var(--image-method-icon);
+}
+
+.card-icon--setup {
+  background-image: var(--image-setup-icon);
+}
+
+.card-icon--progress {
+  background-image: var(--image-progress-icon);
+}
+
+.download-icon {
+  width: 25px;
+  height: 25px;
+  background-image: var(--image-download-icon);
+}
+
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  background: var(--color-dark-green);
+}
+
+
+.logo {
+  display: flex;
+  align-items: center;
+  white-space: nowrap; /* Impede que o nome Next Fret quebre e fique em duas linhas. */
+  margin-left: 20px; 
+}
+
+.logo-text {
+  color: var(--color-text);
+  font-size: 30px;
+  font-weight: bold;
+  margin-left: -10px;
+
+}
+
+.navbar--mini .logo-text {
+  font-size: 25px;
+}
+
+.navbar-links {
+  display: flex;
+  align-items: center;
+  gap: 60px;
+  margin-right: 60px;
+}
+
+.navbar-links a {
+  color: var(--color-text-secondary);
+  font-size: 15px;
+}
+
+/* 
+  Estilização dos links do menu de navegação.
+  Ativa o efeito visual em dois cenários:
+  :hover = Quando o usuário passa o mouse em cima do link.
+  .active = Quando o link representa a página atual onde o usuário está.
+ */
+.navbar-links a:hover,
+.navbar-links a.active {
+  color: var(--color-text);
+}
+
+/* Botões do site. */
+.btn-primary,
+.btn-secondary,
+.btn-watch {
+  display: inline-block;
+  padding: 15px 25px;
+  border: none;
+  border-radius: 10px;
+  background: var(--color-main-green);
+  color: var(--color-text);
+  font-weight: bold;
+  text-align: center;
+}
+
+/* Hover dos botões . */
+.btn-primary:hover,
+.btn-secondary:hover,
+.btn-watch:hover {
+  background: var(--color-hover-green);
+}
+
+.btn-secondary {
+  margin-top: 20px;
+  background: #173c25;
+}
+
+.hero {
+  min-height: 650px;
+  position: relative; /* Faz o hero virar a referência para posicionar a camada escura dentro dele. */
+  display: flex;
+  align-items: center;
+  padding: 80px 60px;
+  background: var(--image-home-hero);
+  background-position: center;
+  background-size: cover;
+}
+
+.hero-overlay {
+  position: absolute; /* Posiciona a camada escura livremente dentro do hero, por cima da imagem. */
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background: rgba(0, 0, 0, 0.50);
+}
+
+.hero-content {
+  position: relative; /* Permite controlar a camada do texto. */
+  max-width: 560px;
+}
+
+.hero h1 {
+  margin-bottom: 50px;
+  font-size: 48px;
+}
+
+.hero p {
+  max-width: 450px;
+  margin-bottom: 40px;
+  font-size: 18px;
+}
+
+.main {
+  width: 100%;
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 80px 40px;
+}
+
+/* Linhas com duas colunas na home. */
+.top-row,
+.bottom-row {
+  display: grid; /* Organiza elementos em linhas e colunas. */
+  grid-template-columns: 1fr 1fr; /* Divide em duas colunas iguais. */
+  align-items: center;
+  gap: 60px;
+  margin-bottom: 80px;
+}
+
+.text-block h2,
+.col-right h2 {
+  margin-bottom: 55px;
+  font-size: 30px;
+}
+
+.text-block li,
+.col-left li {
+  margin-bottom: 20px;
+}
+.music-intro {
+  margin-top: 40px;
+  margin-bottom: 24px;
+
+}
+
+.music-list li {
+  margin-bottom: 18px;
+}
+
+.card-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr; /* Divide em três colunas iguais. */
+  gap: 20px;
+  margin-bottom: 80px;
+}
+
+.card {
+  min-height: 200px;
+  padding: 30px;
+  text-align: center;
+  border-radius: 8px;
+  background: var(--color-card);
+}
+
+.card h3 {
+  margin-bottom: 8px;
+}
+
+.col-left p {
+  font-weight: bold;
+}
+
+.col-right p {
+  margin-bottom: 30px;
+}
+
+.col-right .btn-primary {
+  margin-top: 20px;
+}
+
+.footer {
+  margin-top: 60px;
+  padding: 30px 20px;
+  background: var(--color-dark-green);
+}
+
+.footer-container {
+  width: 100%;
+  max-width: 1120px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.footer-logo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.footer-logo p {
+  color: var(--color-text);
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.footer-links {
+  display: flex;
+  gap: 20px;
+}
+
+.footer-links a,
+.footer-copy {
+  color: var(--color-text-secondary);
+}
+
+/* Tela de login e cadastro. */
+.auth {
+  min-height: 700px;
+  display: flex;
+  align-items: center;
+  padding: 40px 80px;
+  background: var(--image-auth-background);
+  background-position: center;
+  background-size: cover;
+}
+
+.auth-box {
+  width: 100%;
+  max-width: 380px;
+  padding: 40px;
+  border-radius: 10px;
+  background: rgba(0, 0, 0, 0.62);
+  backdrop-filter: blur(5px); /* Desfoca a imagem atrás da caixa. */
+}
+
+.auth-box h1 {
+  margin-bottom: 24px;
+  font-size: 32px;
+}
+
+.auth-box label {
+  display: block; /* Faz o texto do campo ocupar uma linha inteira, deixando o input na linha de baixo. */
+  margin-bottom: 6px;
+  font-weight: bold;
+}
+
+.auth-box input {
+  width: 100%;
+  min-height: 50px;
+  margin-bottom: 16px;
+  padding: 0 12px;
+  border: 1px solid rgba(255, 255, 255, 0.25); /* Borda branca transparente. */
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.18);
+  color: var(--color-text);
+}
+
+.auth-box input:focus {
+  border-color: var(--color-main-green); /* Muda a borda quando o input está selecionado. */
+}
+
+.auth-box .btn-primary {
+  width: 100%;
+}
+
+.login-link {
+  margin-top: 15px;
+  font-size: 13px;
+  text-align: center;
+}
+
+.login-link a {
+  color: var(--color-text);
+  text-decoration: underline; /* Coloca sublinhado para parecer clicável. */
+}
+
+.dashboard-container {
+  display: flex;
+  min-height:100vh;
+}
+
+.sidebar {
+  width: 200px;
+  min-width: 200px;
+  align-self: stretch; /* Faz a sidebar esticar até o final da área interna. */
+  padding: 40px 0;
+  background: var(--color-dark-green);
+}
+
+.menu-lateral {
+  display: flex;
+  flex-direction: column; /* Coloca os links um embaixo do outro. */
+  gap: 30px;
+  padding-top: 50px; /* Desce os itens da sidebar. */
+
+}
+
+.sidebar a {
+  display: block; /* Faz o link ocupar a linha inteira. */
+  padding: 0 40px;
+  color: var(--color-text);
+  font-size: 22px;
+  font-weight: bold;
+}
+
+.sidebar a:hover,
+.sidebar a.active {
+  color: var(--color-light-green);
+}
+
+.user-block {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 20px 24px 0;
+  padding: 12px 16px;
+  border-radius: 8px;
+  background: rgba(0, 0, 0, 0.18);
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.user-avatar {
+  width: 34px;
+  height: 34px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 18px;
+  background: var(--color-light-green);
+  color: var(--color-background);
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.content {
+  flex: 1; /* Como a página usa flex, isso faz o conteúdo crescer e ocupar o espaço que sobra ao lado do menu lateral. */
+  min-width: 0;
+  padding: 60px 80px;
+}
+
+.content h1 {
+  margin-bottom: 34px;
+  font-size: 32px;
+  font-weight: 400;
+}
+
+/* Lista de aulas, músicas e materiais. */
+.list {
+  width: 100%;
+  max-width: 850px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.item-bar {
+  min-height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 12px 26px;
+  border-radius: 10px;
+  background: var(--color-list);
+}
+
+.item-info {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.item-info-row {
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.arrow-v {
+  display: none;
+}
+
+.title {
+  color: var(--color-text);
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.subtitle {
+  color: var(--color-text-secondary);
+  font-size: 15px;
+}
+
+/* Controles das listas. */
+.badge,
+.btn-action,
+.lesson-link,
+.lesson-btn {
+  min-width: 136px;
+  min-height: 50px;
+  display: inline-block;
+  padding: 15px 18px;
+  border: 1px solid transparent; /* Cria uma borda invisível para o botão não mudar de tamanho quando a borda verde aparecer. */
+  border-radius: 8px;
+  background: var(--color-control);
+  color: var(--color-text);
+  font-size: 15px;
+  font-weight: bold;
+  text-align: center;
+}
+
+.item-actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 12px;
+  min-width: 250px;
+}
+
+.lesson-link {
+  min-width: 112px;
+  background: #173c25;
+}
+
+.badge:hover,
+.btn-action:hover,
+.lesson-link:hover,
+.lesson-btn:hover {
+  background: #173b21;
+}
+
+.badge-easy {
+  color: var(--color-light-green);
+}
+
+.badge-medium {
+  color: var(--color-orange);
+}
+
+.badge-hard {
+  color: var(--color-red);
+}
+
+.lesson-btn {
+  min-width: 170px;
+}
+
+.lesson-btn.is-completed {
+  color: var(--color-light-green);
+  border-color: rgba(0, 255, 102, 0.45);
+}
+
+.lesson-btn.is-completed::before {
+  content: "✓ "; /* Adiciona o check antes do texto. */
+}
+
+/* Dashboard. */
+.dashboard-content {
+  max-width: 980px;
+}
+
+.dashboard-title {
+  margin-bottom: 40px;
+}
+
+.dashboard-title h1,
+.dashboard-title p {
+  margin: 0;
+  color: var(--color-text);
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 34px 44px;
+}
+
+.dashboard-grid .summary-card,
+.dashboard-line-card {
+  border: none;
+  border-radius: 0;
+  background: #062700;
+}
+
+.dashboard-grid .summary-card {
+  min-height: 160px;
+  padding: 24px 14px;
+}
+
+.dashboard-grid .summary-card h2,
+.dashboard-line-card h2 {
+  margin-bottom: 18px;
+  font-size: 22px;
+}
+
+.summary-card {
+  min-height: 180px;
+  padding: 24px;
+  border-radius: 8px;
+  background: var(--color-card);
+}
+
+.check-list {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-left: 0;
+  list-style: none; /* Remove os marcadores padrão da lista, como as bolinhas. */
+  color: var(--color-text);
+  font-size: 17px;
+  font-weight: bold;
+}
+
+.check-list li {
+  color: var(--color-text);
+}
+
+.lesson-number {
+  display: block;
+  margin-bottom: 10px;
+  color: var(--color-text);
+  font-size: 22px;
+  font-weight: bold;
+}
+
+.summary-card--next p,
+.summary-card--continue p {
+  color: var(--color-text);
+  font-weight: bold;
+}
+
+.dashboard-icon-link,
+.dashboard-arrow-link {
+  display: none;
+}
+
+.summary-card--continue .btn-secondary {
+  width: 165px;
+  margin-top: 18px;
+  border-radius: 0;
+  background: #0d3f04;
+}
+
+.dashboard-line-card {
+  grid-column: span 2;
+  min-height: 200px;
+  padding: 24px 28px 10px;  
+  background: #1d1d1f;
+}
+
+.dashboard-line-card h2 {
+  font-size: 16px;
+}
+
+.dashboard-line-chart {
+  width: 100%;
+  height: 150px;
+  padding: 0;
+}
+
+.dashboard-line-chart canvas {
+  width: 100%;
+  height: 100%;
+}
+
+.dashboard-pie-area {
+  width: 100%;
+  height: 110px;
+}
+
+.about-layout {
+  position: relative;
+}
+
+.about-text {
+  width: 100%;
+  max-width: 650px;
+  padding: 36px;
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  background: var(--color-list);
+  font-size: 15px;
+}
+
+.about-text p {
+  margin-bottom: 18px;
+}
+
+.decorative-img {
+  position: absolute;
+  right: 50px;
+  bottom: 0;
+  width: 350px;
+  height: 440px;
+  z-index: 0;
+  background-image: var(--image-about);
+  background-position: center bottom;
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+
+.about-layout .content {
+  position: relative;
+  z-index: 1;
+}
+
+/* Fundo da página calculadora. */
+.calculator-layout {
+  background:var(--image-setup-background);
+  background-position: center;
+  background-size: cover;
+}
+
+.calculator-grid {
+  width: 100%;
+  max-width: 950px;
+  display: grid;
+  grid-template-columns: 430px 1fr;
+  gap: 24px;
+  align-items: flex-start; 
+}
+
+.calculator-card {
+  padding: 30px;
+  border: 1px solid var(--color-border);
+  border-radius: 24px;
+  background: var(--color-list);
+}
+
+.calculator-card h2 {
+  margin-bottom: 20px;
+  font-size: 22px;
+}
+
+.calculator-form-group {
+  margin-bottom: 16px;
+}
+
+.calculator-form-group p {
+  margin-bottom: 8px;
+  color: var(--color-text);
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.calculator-form-group input,
+.calculator-form-group select {
+  width: 100%;
+  min-height: 50px;
+  padding: 0 12px;
+  border: 2px solid transparent; /* Deixa uma borda invisível para ela só mudar de cor no focus. */
+  border-radius: 8px;
+  background: #dddddd;
+  color: #000000;
+}
+
+.calculator-form-group input:focus,
+.calculator-form-group select:focus {
+  border-color: var(--color-main-green);
+}
+
+.calculator-card .btn-primary {
+  width: 100%;
+  margin-top: 8px;
+}
+
+.calculator-items {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.calculator-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  padding: 16px;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.calculator-item-info {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.calculator-item span,
+.calculator-item p {
+  color: var(--color-text-secondary);
+}
+
+.calculator-item-actions {
+  display: flex;
+  gap: 10px;
+}
+
+.calculator-item-actions button {
+  min-height: 40px;
+  padding: 0 14px;
+  border: none;
+  border-radius: 8px;
+  background: var(--color-control);
+  color: var(--color-text);
+  font-weight: bold;
+}
+
+.calculator-total {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  margin-top: 24px;
+  padding-top: 18px;
+  border-top: 1px solid var(--color-border); 
+}
+
+.calculator-total span {
+  color: var(--color-text-secondary);
+}
+
+.calculator-total strong {
+  color: var(--color-light-green);
+  font-size: 24px;
+}
+
+.btn-remover {
+  min-width: 100px;
+  min-height: 42px;
+  flex-shrink: 0;
+  padding: 0 16px;
+  border: 1px solid rgba(255, 77, 77, 0.55);
+  border-radius: 8px;
+  background: rgba(255, 77, 77, 0.12);
+  color: var(--color-text);
+  font-size: 14px;
+  font-weight: bold;
+  transition: 0.2s;
+}
+
+.btn-remover:hover {
+  background: var(--color-red);
+  border-color: var(--color-red);
+  color: #000000;
+  transform: translateY(-1px);
+  box-shadow: 0 8px 18px rgba(255, 77, 77, 0.25);
+}
+
+
+
+
